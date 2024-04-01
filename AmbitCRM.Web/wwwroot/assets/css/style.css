@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --theme-color-1: #ffffff;
+  --theme-color-2: #ff0000;
+  --theme-color-3: #000000;
+
+  --inactive-links: #9d9d9c;
+  --date: #cacaca;
+
+  --login-btn: #1d1d1b;
+  --btn-color: #ffffff;
+
+  --box-shadow: #00000026;
+}
+
+body {
+  font-family: "Jost", sans-serif;
+}
+
+.btn-color,
+.btn-color:hover {
+  background-color: var(--theme-color-3);
+  color: var(--theme-color-1);
+}
+
+#login {
+  background-image: url(../images/login_bg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#login form button {
+  background-color: var(--login-btn);
+  color: var(--btn-color);
+}
+
+.login_oueter {
+  width: 360px;
+  max-width: 100%;
+  color: #fff;
+}
+
+.logo_outer {
+  text-align: center;
+}
+
+.logo_outer img {
+  margin-bottom: 40px;
+}
+.log {
+  text-align: center;
+}
+
+header {
+  box-shadow: 0px 2px 15px 0px var(--box-shadow);
+  background-color: var(--theme-color-1);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+header .profile,
+header p {
+  font-family: Poppins;
+  letter-spacing: 0.02em;
+  text-align: left;
+  font-weight: 600;
+}
+
+header .profile {
+  font-size: 14px;
+  line-height: 21px;
+}
+header p {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--date);
+  margin: 0;
+}
+.navbar-nav .nav-link {
+  color: var(--inactive-links);
+}
+.navbar-nav .nav-link.active {
+  color: var(--theme-color-2);
+}
+
+button .arrow {
+  transition-duration: 0.6s;
+}
+button.collapsed .arrow {
+  rotate: 180deg;
+  transition-duration: 0.6s;
+}
+
+.card {
+  box-shadow: 0px 0px 4px 0px #00000040;
+}
+
+table {
+  font-size: 13.36px;
+}
+
+th {
+  background-color: var(--theme-color-2) !important;
+  color: var(--theme-color-1) !important;
+}
