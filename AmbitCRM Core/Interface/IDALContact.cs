@@ -13,5 +13,7 @@ namespace AmbitCRM_Core.Interface
 
         ResponseModel BookmarkStatus(BookmarkedModel BM);
 
+        ResponseModel SaveSearch(SearchModel SM);
+
     }
 }

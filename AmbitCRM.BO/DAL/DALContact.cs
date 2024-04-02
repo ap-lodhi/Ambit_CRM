@@ -114,5 +114,62 @@ namespace AmbitCRM.BO.DAL
             return result;
         }
         #endregion
+
+        public ResponseModel SaveSearch(SearchModel SM)
+        {
+            ResponseModel result = new ResponseModel();
+            DALCommon log = new DALCommon();
+            using (SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString))
+            {
+                try
+                {
+                    con.Open();
+
+
+
+                    using (SqlCommand cmd = new SqlCommand("sp_save_search_details", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@SearchId", SM.searchId);
+                        cmd.Parameters.AddWithValue("@UserId",SM.UserID );
+                        cmd.Parameters.AddWithValue("@CompanyName",SM.CompanyName );
+                        cmd.Parameters.AddWithValue("@ContactName",SM.ContactName );
+                        cmd.Parameters.AddWithValue("@Email", SM.Email);
+                        cmd.Parameters.AddWithValue("@City", SM.City);
+                        cmd.Parameters.AddWithValue("@@CreatedBy", SM.UserID);
+
+
+
+                        var id = cmd.ExecuteNonQuery();
+
+                        if (id > 0)
+                        {
+                            result.status = true;
+                            result.message = "search save  Successfully";
+                            log.SaveLog("Search", "Search  Save Successfully");
+                        }
+                        else
+                        {
+                            result.status = false;
+                            result.message = "Please Check...Something Went wrong...!!!";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.status = false;
+                    log.SaveLog("Search Save", "ex" + ex);
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+
+
     }
 }

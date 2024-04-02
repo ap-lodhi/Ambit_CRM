@@ -23,6 +23,7 @@ namespace Ambit_CRM.Handler
             
             
             
+            
             HeadersKeyDetails headersKeyDetails = new HeadersKeyDetails();
             headersKeyDetails.jwtToken = context.HttpContext.Request.Headers["jwtToken"].ToString();
             headersKeyDetails.empEmail = context.HttpContext.Request.Headers["empEmail"].ToString();

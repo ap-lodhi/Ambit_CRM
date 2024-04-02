@@ -11,7 +11,7 @@ namespace Ambit_CRM.Controllers
     [ApiController]
     public class CommonController : ControllerBase
     {
-
+        // test
         private readonly IDALCommon _ICommon;
         private readonly IConfiguration _Config;
         public CommonController(IDALCommon ICommon, IConfiguration config)

@@ -9,7 +9,7 @@ namespace AmbitCRM.Web.Controllers
     {
         Uri baseAddress = new Uri("https://localhost:7241/api");
         private readonly HttpClient _client;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public LoginController()
         {
             _client = new HttpClient();
@@ -28,7 +28,7 @@ namespace AmbitCRM.Web.Controllers
         public JsonResult CheckLogin(LoginModel loginModel)
         {
            
-            string requestUri = $"{_client.BaseAddress}/Login/login";
+            string requestUri = $"{_client.BaseAddress}/Login/loginApp";
 
         
             var json = JsonConvert.SerializeObject(loginModel);
@@ -40,7 +40,19 @@ namespace AmbitCRM.Web.Controllers
             {
              
                 var responseData = response.Content.ReadAsStringAsync().Result;
-            
+             
+
+                // Deserialize the JSON response to extract user information
+               // var userInfo = JsonConvert.DeserializeObject<ResponseModel>(responseData);
+
+                // Store user information in session
+                //_httpContextAccessor.HttpContext.Session.SetString("AuthToken", userInfo.auth_token);
+                //_httpContextAccessor.HttpContext.Session.SetString("UserKey", userInfo.UserKey);
+                //_httpContextAccessor.HttpContext.Session.SetString("EmployeeName", userInfo.EmployeeName);
+                //_httpContextAccessor.HttpContext.Session.SetString("Email", userInfo.Email);
+                //_httpContextAccessor.HttpContext.Session.SetString("LastLoginTime", userInfo.LastLoginTime.ToString());
+
+
                 return Json(responseData);
             }
             return Json(response);

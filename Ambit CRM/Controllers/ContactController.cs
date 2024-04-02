@@ -40,7 +40,16 @@ namespace Ambit_CRM.Controllers
 
             return Ok(res);
         }
-       
+
+
+        [HttpPost, Route("SaveSearch")]
+        public ActionResult SaveSearch(SearchModel SM)
+        {
+
+            var res = _IContact.SaveSearch(SM);
+
+            return Ok(res);
+        }
 
     }
 }

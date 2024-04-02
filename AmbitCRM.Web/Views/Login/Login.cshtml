@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-md-12 px-0">
 
-                    <form class="py-4" style="background-color: #0000004a;" action="index.html">
+                    <form class="py-4" style="background-color: #0000004a;" >
                         <div class="login_oueter col-md-4 m-auto">
                             <h3 class="log">LOGIN</h3>
                             <p style="text-align: center; font-size: small">
@@ -75,7 +75,7 @@
     function Login() {
         event.preventDefault(); // Prevent the default form submission behavior
         $(".validation-message").remove();
-      
+
         var Email = $("#email").val();
         var Password = $("#Password").val();
 
@@ -92,11 +92,12 @@
 
 
         var obj = {
-           
+
             Email: Email,
             Password: Password,
+            DeviceId: "Web",
         };
-        // debugger;
+
         $.ajax({
             type: "POST",
             url: "/Login/CheckLogin",
@@ -107,7 +108,7 @@
                 console.log(result)
                 if (result.status) {
                     alert(result.message);
-                    window.location.href = "/Dasboard/Dasboard"; // Use replace for redirect
+                    window.location.href = "/Dashboard/Dashboard"; // Use replace for redirect
                 } else {
                     alert(result.message);
                 }

@@ -21,41 +21,67 @@
                     <div class="card">
                         <div class="card-header bg-white">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
-                                            <button class="btn"
-                                                    type="button"
-                                                    data-bs-toggle="collapse"
-                                                    data-bs-target="#collapseWidthExample"
-                                                    aria-expanded="false"
-                                                    aria-controls="collapseWidthExample">
-
+                                            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+                                                    aria-expanded="false" aria-controls="collapseWidthExample">
                                                 <img src="~/assets/images/hamburger.svg" alt="..." />
                                             </button>
                                         </div>
-                                        <div class="flex-grow-1 ms-3">Home</div>
+                                        <!-- <div class="flex-grow-1 ms-3">Home</div> -->
                                     </div>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <nav class="navbar navbar-expand-lg">
                                         <div class="container-fluid">
-                                            <div class="navbar-collapse bg-white"
-                                                 id="navbarSupportedContent">
+                                            <div class="navbar-collapse bg-white d-flex" id="">
                                                 <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                                                    <select class="form-select"
-                                                            aria-label="Default select example">
-                                                        <option selected>Select Column</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                            Select Column
+                                                        </button>
+                                                        <ul class="dropdown-menu columnName p-0">
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Company Name</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Contact Name</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Email</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Source</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">City	</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Contact Type</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">RM</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Creation Date</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Last Interaction Date</label>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Last Interaction With</label>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 <form class="d-flex" role="search">
-                                                    <select class="form-select"
-                                                            aria-label="Default select example">
+                                                    <select class="form-select" aria-label="Default select example">
                                                         <option selected>Show</option>
-                                                        <option value="1">Hide</option>
+                                                        <option value="1">10</option>
+                                                        <option value="1">20</option>
+                                                        <option value="1">50</option>
                                                     </select>
                                                 </form>
                                             </div>
@@ -67,7 +93,7 @@
                         <div class="card-body p-0">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-2 collapse collapse-horizontal show p-0"
+                                    <div class="col-md-3 collapse collapse-horizontal show p-0"
                                     @* file-include-html="assets/includes/sidebar.html" *@
                                          id="collapseWidthExample">
 
@@ -138,15 +164,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-10" id="main">
+                                    <div class="col-md-9 my-3" id="main">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="table-responsive rounded-3 border">
+                                                <h1>Bookmark Contacts</h1>
+                                                <div class="table-responsive rounded-3 border bookmakerTable">
                                                     <table class="table m-0" id="tblContact">
                                                         <thead>
                                                             <tr>
                                                                 <th></th>
-                                                                <th>Contact Id</th>                                                           
+                                                                <th>Contact Id</th>
                                                                 <th>Company Name</th>
                                                                 <th>Contact Name</th>
                                                                 <th>Email</th>
@@ -159,7 +186,101 @@
                                                                 <th>Last Interaction With</th>
                                                             </tr>
                                                         </thead>
+                                                       
                                                     </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 mt-5">
+                                                <h1>Previous searches</h1>
+                                                <div class="row previous_search">
+                                                    <p>Exact Search</p>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Company Name</li>
+                                                                <li>Ambit</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>City</li>
+                                                                <li>Mumbai</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Email Address</li>
+                                                                <li>Piyush@Ambit.com</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row previous_search">
+                                                    <p>Similar Search</p>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Company Name</li>
+                                                                <li>Ambit</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>City</li>
+                                                                <li>Mumbai</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Email Address</li>
+                                                                <li>Piyush@Ambit.com</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row previous_search">
+                                                    <p>Related Search</p>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Company Name</li>
+                                                                <li>Ambit</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>City</li>
+                                                                <li>Mumbai</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 my-1">
+                                                        <div class="card card-body py-0 pe-0">
+                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                <li>Email Address</li>
+                                                                <li>Piyush@Ambit.com</li>
+                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,13 +307,13 @@
     jQuery.noConflict();
     jQuery(document).ready(function ($) {
         var companyInput = $('#company');
-        debugger;
+    
         var contactInput = $('#contact');
         var emailInput = $('#email');
         var cityInput = $('#city');
-        debugger;
+        debugger
         var searchButton = $('#btnSearch');
-        debugger;
+        
         var table = $('#tblContact').DataTable({
             serverSide: true,
             ajax: {
@@ -209,7 +330,7 @@
                     data.Email = emailInput.val();
                     data.City = cityInput.val();
                 }
-            },
+            },                                      
             language: {
                 emptyTable: "No record found.",
                 processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="color:#2a2b2b;"></i><span class="sr-only">Loading...</span>'
@@ -314,8 +435,30 @@
 
 
         searchButton.click(function () {
-            table.draw();
+            var searchData = {
+                CompanyName: companyInput.val(),
+                ContactName: contactInput.val(),
+                Email: emailInput.val(),
+                City: cityInput.val()
+            };
+        
+            $.ajax({
+                url: '/Dashboard/SaveSearch',
+                method: 'POST',
+                data: searchData,
+                success: function (response) {
+                    
+                    console.log("Search details saved successfully!");
+                    
+                    table.draw();
+                },
+                error: function (xhr, status, error) {
+                  
+                    console.error("Error occurred while saving search details:", error);
+                }
+            });
         });
+
     });
 
 </script> 
