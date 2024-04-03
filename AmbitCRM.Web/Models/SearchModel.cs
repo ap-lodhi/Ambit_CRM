@@ -2,7 +2,7 @@
 {
     public class SearchModel
     {
-       public int  searchId { get; set; }   
+       public string SearchType { get; set; }   
        public string  UserID { get; set; }   
         public string CompanyName { get; set; }
         public string ContactName { get; set;}

@@ -131,13 +131,13 @@ namespace AmbitCRM.BO.DAL
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@SearchId", SM.searchId);
+                        cmd.Parameters.AddWithValue("@SearchType", SM.SearchType);
                         cmd.Parameters.AddWithValue("@UserId",SM.UserID );
                         cmd.Parameters.AddWithValue("@CompanyName",SM.CompanyName );
                         cmd.Parameters.AddWithValue("@ContactName",SM.ContactName );
                         cmd.Parameters.AddWithValue("@Email", SM.Email);
                         cmd.Parameters.AddWithValue("@City", SM.City);
-                        cmd.Parameters.AddWithValue("@@CreatedBy", SM.UserID);
+                        cmd.Parameters.AddWithValue("@CreatedBy", SM.UserID);
 
 
 
@@ -170,6 +170,115 @@ namespace AmbitCRM.BO.DAL
             return result;
         }
 
+        //public List<SearchModel> GetSearchList(string id)
+        //{
+        //    DALCommon log = new DALCommon();
+        //    List<SearchModel> SearchDetails = new List<SearchModel>();
 
+        //    try
+        //    {
+        //        using (SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString))
+        //        {
+        //            con.Open();
+
+        //            using (SqlCommand cmd = new SqlCommand("GetUserSearchDetails", con))
+        //            {
+        //                cmd.CommandType = CommandType.StoredProcedure;
+        //                cmd.Parameters.AddWithValue("@UserId", id);
+
+        //                SqlDataReader reader = cmd.ExecuteReader();
+        //                if (reader.HasRows)
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        SearchModel u = new SearchModel();
+        //                        u.SearchType = string.IsNullOrWhiteSpace(reader["SearchType"].ToString()) ? "" : reader["SearchType"].ToString();
+
+        //                        u.CompanyName = string.IsNullOrWhiteSpace(reader["CompanyName"].ToString()) ? "" : reader["CompanyName"].ToString();
+
+        //                        u.ContactName = string.IsNullOrWhiteSpace(reader["ContactName"].ToString()) ? "" : reader["ContactName"].ToString();
+
+        //                        u.Email = string.IsNullOrWhiteSpace(reader["Email"].ToString()) ? "" : reader["Email"].ToString();
+
+        //                        u.City = string.IsNullOrWhiteSpace(reader["City"].ToString()) ? "" : reader["City"].ToString();
+
+        //                        SearchDetails.Add(u);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.SaveLog("Get SearchList", ex.ToString());
+        //        throw; 
+        //    }
+
+
+        //    return SearchDetails;
+        //}
+
+        public List<SearchModel> GetSearchList(string id)
+        {
+            DALCommon log = new DALCommon();
+            List<SearchModel> SearchDetails = new List<SearchModel>();
+            SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
+            {
+
+                con.Open();
+                try
+                {
+                 
+                   
+                    using (SqlCommand cmd = new SqlCommand("GetUserSearchDetails", con)) 
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+;
+                        cmd.Parameters.AddWithValue("@UserId", id);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                SearchModel u = new SearchModel();
+                                u.SearchType = string.IsNullOrWhiteSpace(reader["SearchType"].ToString()) ? "" : reader["SearchType"].ToString();
+
+                                u.CompanyName = string.IsNullOrWhiteSpace(reader["CompanyName"].ToString()) ? "" : reader["CompanyName"].ToString();
+
+                                u.ContactName = string.IsNullOrWhiteSpace(reader["ContactName"].ToString()) ? "" : reader["ContactName"].ToString();
+
+                                u.Email = string.IsNullOrWhiteSpace(reader["Email"].ToString()) ? "" : reader["Email"].ToString();
+
+                                u.City = string.IsNullOrWhiteSpace(reader["City"].ToString()) ? "" : reader["City"].ToString();
+
+                                SearchDetails.Add(u);
+
+
+                            }
+                        }
+                    }
+                }
+
+                catch (Exception ex)
+
+                {
+                    log.SaveLog("Get SearchList", ex.ToString());
+
+
+                }
+
+                finally
+
+                {
+
+                    con.Close();
+
+                    con.Dispose();
+
+                }
+
+                return SearchDetails;
+            }
+        }
     }
 }

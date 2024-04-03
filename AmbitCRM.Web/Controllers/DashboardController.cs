@@ -25,10 +25,6 @@ namespace AmbitCRM.Web.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public ActionResult Dashboard()
-        {
             //string userKey = _httpContextAccessor.HttpContext.Session.GetString("UserKey");
             //string employeeName = _httpContextAccessor.HttpContext.Session.GetString("EmployeeName");
             //string email = _httpContextAccessor.HttpContext.Session.GetString("Email");
@@ -37,7 +33,20 @@ namespace AmbitCRM.Web.Controllers
 
             //ViewBag.emp = employeeName;
 
-            return View();
+        [HttpGet]
+        public ActionResult Dashboard()
+
+        {
+            List<SearchModel> srcList = new List<SearchModel>();
+            string url = $"{_client.BaseAddress}/Contact/SearchDetails?id={1}";
+            HttpResponseMessage response = _client.GetAsync(url).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                srcList = JsonConvert.DeserializeObject<List<SearchModel>>(data);
+            }
+            ViewBag.srch=   srcList;
+            return View(srcList);
         }
         public JsonResult GetContact(DataTableParams dataTableParams, string? companyName, string? contactName, string? email, string? city)
         {

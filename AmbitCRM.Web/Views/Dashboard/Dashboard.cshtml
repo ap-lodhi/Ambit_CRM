@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AmbitCRM.Web.Models
+
+@{
     ViewData["Title"] = "Dashboard";
 }
 
@@ -11,6 +13,15 @@
 
 
 </head>
+<style>
+    .intial {
+        display: block;
+    }
+
+    .tblContact {
+        display: none;
+    }
+</style>
 
 <body>
 
@@ -148,14 +159,16 @@
                                                                         <img src="~/assets/images/search.svg" alt="" />
                                                                         Exact Search
                                                                     </button>
-                                                                    <button type="submit" class="btn btn-color w-100 mb-2">
+                                                                    <button type="submit" class="btn btn-color w-100 mb-2" id="similar">
                                                                         <img src="~/assets/images/similar_search.svg" alt="" />
                                                                         Similar Search
-                                                                    </button><button type="submit" class="btn btn-color w-100 mb-3">
+                                                                    </button><button type="submit" class="btn btn-color w-100 mb-3" id="related">
                                                                         <img src="~/assets/images/related_search.svg" alt="" />
                                                                         Related Search
                                                                     </button>
-
+                                                                    <button type="reset" class="btn btn-outline-danger w-100 mb-2">
+                                                                        Reset
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -164,10 +177,33 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9 my-3" id="main">
+                                  
+                                        <div class="col-md-9 my-3" id="main">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h1>Bookmark Contacts</h1>
+                                                <div class="table-responsive rounded-3 border bookmakerTable">
+                                                    <table class="table m-0" id="intial">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Contact Id</th>
+                                                                <th>Company Name</th>
+                                                                <th>Contact Name</th>
+                                                                <th>Email</th>
+                                                                <th>City</th>
+                                                                <th>Source</th>
+                                                                <th>Contact Type</th>
+                                                                <th>RM</th>
+                                                                <th>Creation Date</th>
+                                                                <th>Last Interaction Date</th>
+                                                                <th>Last Interaction With</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                    </table>
+                                                </div>
+
                                                 <div class="table-responsive rounded-3 border bookmakerTable">
                                                     <table class="table m-0" id="tblContact">
                                                         <thead>
@@ -189,76 +225,105 @@
                                                        
                                                     </table>
                                                 </div>
+
+
                                             </div>
+
                                             <div class="col-md-12 mt-5">
                                                 <h1>Previous searches</h1>
                                                 <div class="row previous_search">
                                                     <p>Exact Search</p>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>Company Name</li>
-                                                                <li>Ambit</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>City</li>
-                                                                <li>Mumbai</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>Email Address</li>
-                                                                <li>Piyush@Ambit.com</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    @foreach (var item in Model as List<SearchModel>)
+                                                    {
+                                                        if (item.SearchType == "Exact")
+                                                        {
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>Company Name</li>
+                                                                        <li>@item.CompanyName</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>City</li>
+                                                                        <li>@item.City</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>Email Address</li>
+                                                                        <li>@item.Email</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+
+                                                    
+                                                    
+
                                                 </div>
                                                 <div class="row previous_search">
+
                                                     <p>Similar Search</p>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>Company Name</li>
-                                                                <li>Ambit</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>City</li>
-                                                                <li>Mumbai</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 my-1">
-                                                        <div class="card card-body py-0 pe-0">
-                                                            <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                <li>Email Address</li>
-                                                                <li>Piyush@Ambit.com</li>
-                                                                <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    @foreach (var item in Model as List<SearchModel>)
+                                                    {
+                                                        if (item.SearchType == "Similar")
+                                                        {
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>Company Name</li>
+                                                                        <li>@item.CompanyName</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>City</li>
+                                                                       <li>@item.City</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 my-1">
+                                                                <div class="card card-body py-0 pe-0">
+                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
+                                                                        <li>Email Address</li>
+                                                                        <li>@item.Email</li>
+                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+
+
+                                                    
                                                 </div>
                                                 <div class="row previous_search">
                                                     <p>Related Search</p>
+                                                    @foreach (var item in Model as List<SearchModel>)
+                                                    {
+                                                        if (item.SearchType == "Related")
+                                                        {
+                                                           
+
                                                     <div class="col-md-4 my-1">
                                                         <div class="card card-body py-0 pe-0">
                                                             <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
                                                                 <li>Company Name</li>
-                                                                <li>Ambit</li>
+                                                                <li>@item.CompanyName</li>
                                                                 <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
                                                             </ul>
                                                         </div>
@@ -267,7 +332,7 @@
                                                         <div class="card card-body py-0 pe-0">
                                                             <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
                                                                 <li>City</li>
-                                                                <li>Mumbai</li>
+                                                                <li>@item.City</li>
                                                                 <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
                                                             </ul>
                                                         </div>
@@ -276,11 +341,14 @@
                                                         <div class="card card-body py-0 pe-0">
                                                             <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
                                                                 <li>Email Address</li>
-                                                                <li>Piyush@Ambit.com</li>
+                                                                <li>@item.Email</li>
                                                                 <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
                                                             </ul>
                                                         </div>
                                                     </div>
+
+                                                        }
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -304,6 +372,8 @@
 
 
 <script>
+
+    
     jQuery.noConflict();
     jQuery(document).ready(function ($) {
         var companyInput = $('#company');
@@ -312,7 +382,10 @@
         var emailInput = $('#email');
         var cityInput = $('#city');
         debugger
-        var searchButton = $('#btnSearch');
+        var exactSearch = $('#btnSearch');
+
+        var similar = $('#similar');
+        var related = $('#related');
         
         var table = $('#tblContact').DataTable({
             serverSide: true,
@@ -375,7 +448,7 @@
             ],
             paging: true,
             pageLength: 10,
-            searching: true,
+            searching: false,
             dom: '<"top row"<"col-6"l><"col-6"f>>rt<"bottom"ip>',
             buttons: [{
                 extend: 'colvis',
@@ -433,32 +506,71 @@
             }
         });
 
+        function showInitialTable() {
+            $('.intial').show();
+            $('.tblContact').hide();
+        }
 
-        searchButton.click(function () {
+        // Function to show the searched table and hide the initial table
+        function showSearchedTable() {
+            $('.intial').hide();
+            $('.tblContact').show();
+        }
+
+        // Hide the searched table initially
+        showInitialTable();
+
+
+
+        exactSearch.click(function () {
+            SaveDetails('Exact');
+            table.draw();
+            showSearchedTable();
+        });
+
+        similar.click(function () {
+            SaveDetails('Similar');
+            table.draw();
+            showSearchedTable();
+        })
+
+        related.click(function () {
+            SaveDetails('Related');
+            table.draw();
+            showSearchedTable();
+        })
+
+        function SaveDetails(type) {
+          
             var searchData = {
+                SearchType: type,
                 CompanyName: companyInput.val(),
                 ContactName: contactInput.val(),
                 Email: emailInput.val(),
-                City: cityInput.val()
-            };
-        
+                City: cityInput.val(),
+                UserID: 1
+                
+           };
+
             $.ajax({
                 url: '/Dashboard/SaveSearch',
                 method: 'POST',
                 data: searchData,
                 success: function (response) {
-                    
+
                     console.log("Search details saved successfully!");
-                    
-                    table.draw();
+
+                   
                 },
                 error: function (xhr, status, error) {
-                  
+
                     console.error("Error occurred while saving search details:", error);
                 }
             });
-        });
-
+        }
     });
 
+
+   
 </script> 
+
