@@ -147,6 +147,7 @@ th {
 
 .previous_search {
     padding: 10px 0;
+    align-items: center;
 }
 
     .previous_search p {

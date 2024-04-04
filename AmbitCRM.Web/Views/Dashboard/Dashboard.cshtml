@@ -1,167 +1,171 @@
-﻿@using AmbitCRM.Web.Models
-
-@{
-    ViewData["Title"] = "Dashboard";
-}
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
-</head>
-
-
-<body>
-
-    <main>
-        <div class="container-fluid py-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header bg-white">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
-                                                    aria-expanded="false" aria-controls="collapseWidthExample">
-                                                <img src="~/assets/images/hamburger.svg" alt="..." />
-                                            </button>
-                                        </div>
-                                        <!-- <div class="flex-grow-1 ms-3">Home</div> -->
+﻿<main>
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <button class="btn"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapseWidthExample"
+                                                aria-expanded="false"
+                                                aria-controls="collapseWidthExample">
+                                            <img src="assets/images/hamburger.svg" alt="..." />
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <nav class="navbar navbar-expand-lg">
-                                        <div class="container-fluid">
-                                            <div class="navbar-collapse bg-white d-flex" id="">
-                                                <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            Select Column
-                                                        </button>
-                                                        <ul class="dropdown-menu columnName p-0">
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Company Name</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Contact Name</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Email</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Source</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">City	</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Contact Type</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">RM</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Creation Date</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Last Interaction Date</label>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" name="" id="company_name" class="me-2"><label for="company_name">Last Interaction With</label>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <form class="d-flex" role="search">
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>Show</option>
-                                                        <option value="1">10</option>
-                                                        <option value="1">20</option>
-                                                        <option value="1">50</option>
-                                                    </select>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </nav>
+                                    <!-- <div class="flex-grow-1 ms-3">Home</div> -->
                                 </div>
                             </div>
+                            <div class="col-md-9">
+                                <nav class="navbar navbar-expand-lg">
+                                    <div class="container-fluid">
+                                        <div class="navbar-collapse bg-white d-flex" id="">
+                                            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-outline-secondary dropdown-toggle"
+                                                            type="button"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                        Select Column
+                                                    </button>
+                                                    <ul class="dropdown-menu columnName p-0">
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Company Name</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Contact Name</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Email</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Source</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">City </label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Contact Type</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">RM</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Creation Date</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Last Interaction Date</label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox"
+                                                                   name=""
+                                                                   id="company_name"
+                                                                   class="me-2" /><label for="company_name">Last Interaction With</label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <form class="d-flex" role="search">
+                                                <select class="form-select"
+                                                        aria-label="Default select example">
+                                                    <option selected>Show</option>
+                                                    <option value="1">10</option>
+                                                    <option value="1">20</option>
+                                                    <option value="1">50</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
                         </div>
-                        <div class="card-body p-0">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-3 collapse collapse-horizontal show p-0"
-                                    @* file-include-html="assets/includes/sidebar.html" *@
-                                         id="collapseWidthExample">
-
-
-                                        <div class="card border-start-0 border-top-0 border-bottom-0">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-12 py-2">
-                                                        <input class="form-control me-2"
-                                                               type="search"
-                                                               placeholder="Search Keyword"
-                                                               aria-label="Search" />
-                                                    </div>
-                                                    <div class="col-md-12 py-2">
-                                                        <div class="card">
-                                                            <button class="btn btn-color w-100 d-flex justify-content-between align-items-center"
-                                                                    type="button"
-                                                                    data-bs-toggle="collapse"
-                                                                    data-bs-target="#collapseExample"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="collapseExample">
-                                                                <span>
-                                                                    <img src="~/assets/images/hamburger2.svg" alt="" /> Advanced
-                                                                    Search
-                                                                </span>
-                                                                <img src="~/assets/images/Drop-down-icon.svg" alt="" class="arrow" />
-                                                            </button>
-                                                            <div class="collapse show" id="collapseExample">
-                                                                <div class="card card-body border-0 shadow-none">
-
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3 collapse collapse-horizontal show p-0" id="collapseWidthExample">
+                                    <div class="card border-start-0 border-top-0 border-bottom-0">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12 py-2">
+                                                    <input class="form-control me-2" type="search" placeholder="Search Keyword" aria-label="Search" />
+                                                </div>
+                                                <div class="col-md-12 py-2">
+                                                    <div class="card">
+                                                        <button class="btn btn-color w-100 d-flex justify-content-between align-items-center" type="button"
+                                                                data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false"
+                                                                aria-controls="collapseExample">
+                                                            <span>
+                                                                <img src="assets/images/hamburger2.svg" alt="" />
+                                                                Advanced Search
+                                                            </span>
+                                                            <img src="assets/images/Drop-down-icon.svg" alt="" class="arrow" />
+                                                        </button>
+                                                        <div class="collapse show" id="collapseExample">
+                                                            <div class="card card-body border-0 shadow-none">
+                                                                <form class="adv_search">
                                                                     <div class="mb-3">
-                                                                        <input type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Enter Company Name" id="company" />
+                                                                        <input type="text" class="form-control" placeholder="Enter Company Name" />
+                                                                        <img src="assets/images/company_name.svg" alt="">
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <input type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Enter Contact Name" id="contact" />
+                                                                        <input type="text" class="form-control" placeholder="Enter Contact Name" />
+                                                                        <img src="assets/images/contact_name.svg" alt="">
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <input type="email"
-                                                                               class="form-control"
-                                                                               placeholder="Enter Email Address" id="email" />
+                                                                        <input type="email" class="form-control" placeholder="Enter Email Address" />
+                                                                        <img src="assets/images/email.svg" alt="">
                                                                     </div>
                                                                     <div class="mb-3">
-                                                                        <input type="text"
-                                                                               class="form-control"
-                                                                               placeholder="Enter City" id="city" />
+                                                                        <input type="email" class="form-control" placeholder="Enter City" />
+                                                                        <img src="assets/images/city.svg" alt="">
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-color w-100 mb-2" id="btnSearch">
-                                                                        <img src="~/assets/images/search.svg" alt="" />
+                                                                    <button type="submit" class="btn btn-color w-100 mb-2">
+                                                                        <img src="assets/images/search.svg" alt="" />
                                                                         Exact Search
                                                                     </button>
-                                                                    <button type="submit" class="btn btn-color w-100 mb-2" id="similar">
-                                                                        <img src="~/assets/images/similar_search.svg" alt="" />
+                                                                    <button type="submit" class="btn btn-color w-100 mb-2">
+                                                                        <img src="assets/images/similar_search.svg" alt="" />
                                                                         Similar Search
-                                                                    </button><button type="submit" class="btn btn-color w-100 mb-3" id="related">
-                                                                        <img src="~/assets/images/related_search.svg" alt="" />
+                                                                    </button><button type="submit" class="btn btn-color w-100 mb-2">
+                                                                        <img src="assets/images/related_search.svg" alt="" />
                                                                         Related Search
                                                                     </button>
                                                                     <button type="reset" class="btn btn-outline-danger w-100 mb-2">
                                                                         Reset
                                                                     </button>
-                                                                </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,163 +173,174 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="col-md-9 my-3" id="main">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>Bookmark Contacts</h1>
+                               @*  <div class="col-md-3 collapse collapse-horizontal show p-0"
+                                      file-include-html="assets/includes/sidebar.html" 
+                                     id="collapseWidthExample">
+                                 </div> *@
+                                <div class="col my-3" id="main">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h1>Bookmark Contacts</h1>
 
-
-                                                <div class="table-responsive rounded-3 border bookmakerTable" >
-                                                    <table class="table m-0" id="tblContact">
-                                                        <thead>
-                                                            <tr>
-                                                                <th></th>
-                                                                <th>Contact Id</th>
-                                                                <th>Company Name</th>
-                                                                <th>Contact Name</th>
-                                                                <th>Email</th>
-                                                                <th>City</th>
-                                                                <th>Source</th>
-                                                                <th>Contact Type</th>
-                                                                <th>RM</th>
-                                                                <th>Creation Date</th>
-                                                                <th>Last Interaction Date</th>
-                                                                <th>Last Interaction With</th>
-                                                            </tr>
-                                                        </thead>
-
-                                                    </table>
                                                 </div>
-
-
+                                                <div class="col text-end">
+                                                    <a href="">
+                                                        <img src="assets/images/cancle.svg" alt="" />
+                                                    </a>
+                                                </div>
                                             </div>
-
-                                            <div class="col-md-12 mt-5">
-                                                <h1>Previous searches</h1>
-                                                <div class="row previous_search">
-                                                    <p>Exact Search</p>
-                                                      @{
-                                                           bool exactSearchDone = false;
-                                                    @foreach (var item in Model as List<SearchModel>)
-                                                    {
-                                                            if (item.SearchType == "Exact"&& !exactSearchDone)
-                                                        {
-                                                                exactSearchDone = true;
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Company Name</li>
-                                                                        <li>@item.CompanyName</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>City</li>
-                                                                        <li>@item.City</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Email Address</li>
-                                                                        <li>@item.Email</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    }
-
-                                                    }
-
-
+                                            <div class="table-responsive rounded-3 border bookmakerTable">
+                                                <table class="table m-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Company Name</th>
+                                                            <th>Contact Name</th>
+                                                            <th>Email</th>
+                                                            <th>Source</th>
+                                                            <th>City</th>
+                                                            <th>Contact Type</th>
+                                                            <th>RM</th>
+                                                            <th>Creation Date</th>
+                                                            <th>Last Interaction Date</th>
+                                                            <th>Last Interaction With</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="assets/images/Star_red.svg"
+                                                                     alt="" />
+                                                            </td>
+                                                            <td>Ambit</td>
+                                                            <td>Piyush Thakur</td>
+                                                            <td>piyush@gmail.com</td>
+                                                            <td>T-1</td>
+                                                            <td>Mumbai</td>
+                                                            <td>E-Mail</td>
+                                                            <td>Pawas Goyal</td>
+                                                            <td>06 March 24</td>
+                                                            <td>06 March 24</td>
+                                                            <td>Piyush Thakur</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-5">
+                                            <h1>Previous searches</h1>
+                                            <div class="row previous_search">
+                                                <div class="col-11"><p>Exact Search</p></div>
+                                                <div class="col-1">
+                                                    <a href="">
+                                                        <img src="assets/images/cancle.svg" alt="" />
+                                                    </a>
                                                 </div>
-                                                <div class="row previous_search">
-
-                                                    <p>Similar Search</p>
-                                                    @foreach (var item in Model as List<SearchModel>)
-                                                    {
-                                                        if (item.SearchType == "Similar")
-                                                        {
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Company Name</li>
-                                                                        <li>@item.CompanyName</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>City</li>
-                                                                        <li>@item.City</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Email Address</li>
-                                                                        <li>@item.Email</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                        }
-                                                      
-                                                    }
-
-
-
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="d-flex list-unstyled m-0 align-items-center">
+                                                            <li>Company Name :</li>
+                                                            <li class="ms-3">Ambit</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <div class="row previous_search">
-                                                    <p>Related Search</p>
-                                                    @foreach (var item in Model as List<SearchModel>)
-                                                    {
-                                                        if (item.SearchType == "Related")
-                                                        {
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>City : </li>
+                                                            <li class="ms-3">Mumbai</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>Email Address : </li>
+                                                            <li class="ms-3">Piyush@Ambit.com</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 my-1">
+                                                    <img src="assets/images/previous_search.svg"
+                                                         alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="row previous_search">
 
+                                                <div class="col-11"><p>Similar Search</p></div>
+                                                <div class="col-1">
+                                                    <a href="">
+                                                        <img src="assets/images/cancle.svg" alt="" />
+                                                    </a>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="d-flex list-unstyled m-0 align-items-center">
+                                                            <li>Company Name :</li>
+                                                            <li class="ms-3">Ambit</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>City : </li>
+                                                            <li class="ms-3">Mumbai</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>Email Address : </li>
+                                                            <li class="ms-3">Piyush@Ambit.com</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 my-1">
+                                                    <img src="assets/images/previous_search.svg"
+                                                         alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="row previous_search">
 
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Company Name</li>
-                                                                        <li>@item.CompanyName</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>City</li>
-                                                                        <li>@item.City</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 my-1">
-                                                                <div class="card card-body py-0 pe-0">
-                                                                    <ul class="p-0 d-flex justify-content-between list-unstyled m-0 align-items-center">
-                                                                        <li>Email Address</li>
-                                                                        <li>@item.Email</li>
-                                                                        <li class="p-2 border"><img src="~/assets/images/previous_search.svg" alt=""></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-
-                                                        }
-                                                    }
+                                                <div class="col-11"><p>Related Search</p></div>
+                                                <div class="col-1">
+                                                    <a href="">
+                                                        <img src="assets/images/cancle.svg" alt="" />
+                                                    </a>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="d-flex list-unstyled m-0 align-items-center">
+                                                            <li>Company Name :</li>
+                                                            <li class="ms-3">Ambit</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>City : </li>
+                                                            <li class="ms-3">Mumbai</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col my-1">
+                                                    <div class="card card-body py-2">
+                                                        <ul class="p-0 d-flex  list-unstyled m-0 align-items-center">
+                                                            <li>Email Address : </li>
+                                                            <li class="ms-3">Piyush@Ambit.com</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1 my-1">
+                                                    <img src="assets/images/previous_search.svg"
+                                                         alt="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -337,201 +352,5 @@
                 </div>
             </div>
         </div>
-    </main>
-</body>
-</html>
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-
-
-<script>
-
-
-    jQuery.noConflict();
-    jQuery(document).ready(function ($) {
-        var companyInput = $('#company');
-         var contactInput = $('#contact');
-        var emailInput = $('#email');
-        var cityInput = $('#city');
-        var exactSearch = $('#btnSearch');
-        var similar = $('#similar');
-        var related = $('#related');
-
-        var table = $('#tblContact').DataTable({
-            serverSide: true,
-            ajax: {
-                url: '/Dashboard/GetContact',
-                type: 'POST',
-                data: function (data) {
-                    data.length = data.length;
-                    data.start = data.start;
-                    data.searchText = data.search.value;
-                    data.sortColumn = data.columns[data.order[0].column].data;
-                    data.sortDirection = data.order[0].dir;
-                    data.CompanyName = companyInput.val();
-                    data.ContactName = contactInput.val();
-                    data.Email = emailInput.val();
-                    data.City = cityInput.val();
-                }
-            },
-            language: {
-                emptyTable: "No record found.",
-                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw" style="color:#2a2b2b;"></i><span class="sr-only">Loading...</span>'
-            },
-            columnDefs: [
-                { targets: [1], visible: false }, 
-                { targets: '_all', visible: true } 
-            ],
-            columns: [
-               { data: 'isBookMarked',
-           render: function (data, type, row) {
-            if (data) {
-                return '<button class="btn btn-icon" data-contact-id="' + row.contactId + '"><i class="fas fa-star text-danger"></i></button>';
-            } else {
-                return '<button class="btn btn-icon" data-contact-id="' + row.contactId + '"><i class="far fa-star text-muted"></i></button>';
-            }
-        }
-    },
-                { data: 'contactId', visible: false }, // Hides the contactId column
-                { data: 'companyName' },
-                { data: 'contactName' },
-                { data: 'email' },
-                { data: 'city' },
-                { data: 'source' },
-                { data: 'contactType' },
-                { data: 'rm' },
-                {
-                    data: 'creationDate',
-                    render: function (data, type, row) {
-                        var date = data.split('T')[0];
-                        return date;
-                    }
-                },
-                {
-                    data: 'lastInsertionDate',
-                    render: function (data, type, row) {
-                        var date = data.split('T')[0];
-                        return date;
-                    }
-                },
-                { data: 'lastInsertionWith' }
-            ],
-            paging: true,
-            pageLength: 10,
-            searching: false,
-            dom: '<"top row"<"col-6"l><"col-6"f>>rt<"bottom"ip>',
-            buttons: [{
-                extend: 'colvis',
-                text: 'Select Columns',
-                className: 'btn btn-primary',
-                columns: ':gt(0)'
-            }]
-        });
-
-        // Event listener for clicking the star icon
-        $(document).on('click', '.btn-icon', function () {
-            var starIcon = $(this).find('i');
-            var contactId = $(this).data('contact-id');
-
-            if (starIcon.hasClass('fas')) {
-              
-               starIcon.removeClass('fas text-warning').addClass('far text-muted');
-                $.ajax({
-                    url: '/Dashboard/BookMarked',
-                    method: 'POST',
-                    data: {
-                        contactId: contactId,
-                        IsBookMarked: false,
-                        UserId: 1
-                    },
-                    success: function (response) {
-
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error
-                        console.error(error);
-
-                    }
-                });
-            } else {
-                // If star is empty, change color to red and add filled class
-                starIcon.removeClass('far text-muted').addClass('fas text-danger');
-                $.ajax({
-                    url: '/Dashboard/BookMarked',
-                    method: 'POST',
-                    data: {
-                        contactId: contactId,
-                        IsBookMarked: true,
-                        UserId: 1
-                    },
-                    success: function (response) {
-
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error
-                        console.error(error);
-
-                    }
-                });
-            }
-        });
-
-       
-
-
-        exactSearch.click(function () {
-            SaveDetails('Exact');
-            table.draw();
-         
-        });
-
-        similar.click(function () {
-            SaveDetails('Similar');
-            table.draw();
-          
-        })
-
-        related.click(function () {
-            SaveDetails('Related');
-            table.draw();
-           
-        })
-
-        function SaveDetails(type) {
-
-            var searchData = {
-                SearchType: type,
-                CompanyName: companyInput.val(),
-                ContactName: contactInput.val(),
-                Email: emailInput.val(),
-                City: cityInput.val(),
-                UserID: 1
-
-            };
-
-            $.ajax({
-                url: '/Dashboard/SaveSearch',
-                method: 'POST',
-                data: searchData,
-                success: function (response) {
-
-                    console.log("Search details saved successfully!");
-
-
-                },
-                error: function (xhr, status, error) {
-
-                    console.error("Error occurred while saving search details:", error);
-                }
-            });
-        }
-    });
-
-
-
-</script>
-
+    </div>
+</main>

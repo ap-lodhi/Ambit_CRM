@@ -1,0 +1,41 @@
+﻿@media (min-width: 992px) {
+    #login {
+        background-image: url(../images/login_bg.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+        #login form {
+            background-color: #0000004a;
+        }
+
+            #login form button {
+                background-color: var(--login-btn);
+                color: var(--btn-color);
+            }
+
+    .login_oueter {
+        color: var(--btn-color);
+    }
+    /* .logo_outer img {
+    margin-bottom: 40px;
+  } */
+    .log {
+        text-align: center;
+    }
+
+    .login-white {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20.23px;
+        letter-spacing: 0.03em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .dropdown-menu {
+        position: absolute;
+    }
+}
