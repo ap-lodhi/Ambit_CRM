@@ -16,8 +16,8 @@ namespace AmbitCRM_Core.Model
         public string? Source {  get; set; }
         public string? ContactType { get; set; }
         public string? RM { get; set; }
- 
-       public DateTime CreationDate { get; set;}
+        public bool IsBookMarked { get; set; }
+        public DateTime CreationDate { get; set;}
         public DateTime LastInsertionDate { get; set;}
         public string? LastInsertionWith { get; set; }   
         public Boolean IsActive { get; set; }

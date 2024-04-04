@@ -19,6 +19,8 @@ namespace Ambit_CRM.Controllers
             _IContact = IContact;
             _Config = config;
         }
+
+
         [HttpGet]
         [Route("ContactList")]
         public ActionResult ContactList(int? start, int? length, string? searchText, string? sortColumn, string? sortDirection, string? CompanyName, string? ContactName, string? Email, string? City)
@@ -31,6 +33,21 @@ namespace Ambit_CRM.Controllers
             }
             return Ok(contactList);
         }
+
+        [HttpGet]
+        [Route("GetBoomarkedList")]
+        public ActionResult GetBoomarkedList(string? id, int? start, int? length, string? sortColumn, string? sortDirection)
+        {
+            List<ContactModel> BookMarked = new List<ContactModel>();
+            BookMarked = _IContact.GetBookMakedList(id,start, length, sortColumn, sortDirection);
+            if (BookMarked.Count == 0)
+            {
+                return NotFound("List not  Found");
+            }
+            return Ok(BookMarked);
+        }
+
+
 
         [HttpPost, Route("BookmarkedStatus")]
         public ActionResult BookmarkedStatus(BookmarkedModel BM)

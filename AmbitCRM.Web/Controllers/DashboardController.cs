@@ -35,8 +35,8 @@ namespace AmbitCRM.Web.Controllers
 
         [HttpGet]
         public ActionResult Dashboard()
-
         {
+            
             List<SearchModel> srcList = new List<SearchModel>();
             string url = $"{_client.BaseAddress}/Contact/SearchDetails?id={1}";
             HttpResponseMessage response = _client.GetAsync(url).Result;
@@ -45,7 +45,7 @@ namespace AmbitCRM.Web.Controllers
                 string data = response.Content.ReadAsStringAsync().Result;
                 srcList = JsonConvert.DeserializeObject<List<SearchModel>>(data);
             }
-            ViewBag.srch=   srcList;
+          
             return View(srcList);
         }
         public JsonResult GetContact(DataTableParams dataTableParams, string? companyName, string? contactName, string? email, string? city)
@@ -56,26 +56,57 @@ namespace AmbitCRM.Web.Controllers
             string sortColumn = dataTableParams.sortColumn;
             string sortDirection = dataTableParams.sortDirection;
             List<ContactViewModel> contactList = new List<ContactViewModel>();
+            List<ContactViewModel> contactListBookMark = new List<ContactViewModel>();
+            List<ContactViewModel> contactListFinal = new List<ContactViewModel>();
 
-          //  _client.DefaultRequestHeaders.Add("jwtToken", "jrttkennnn");
-          //  _client.DefaultRequestHeaders.Add("empEmail", "test@gmail.occ");
-          //  _client.DefaultRequestHeaders.Add("deviceId", "457645");
+            //  _client.DefaultRequestHeaders.Add("jwtToken", "jrttkennnn");
+            //  _client.DefaultRequestHeaders.Add("empEmail", "test@gmail.occ");
+            //  _client.DefaultRequestHeaders.Add("deviceId", "457645");
 
-            
-
-
-            string url = $"{_client.BaseAddress}/Contact/ContactList?start={start}&length={length}&searchText={searchText}&sortColumn={sortColumn}&sortDirection={sortDirection}&CompanyName={companyName}&ContactName={contactName}&Email={email}&City={city}";
-            HttpResponseMessage response = _client.GetAsync(url).Result;
-            if (response.IsSuccessStatusCode)
+            if (!string.IsNullOrEmpty(companyName) || !string.IsNullOrEmpty(contactName) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(city))
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                contactList = JsonConvert.DeserializeObject<List<ContactViewModel>>(data);
+                string url = $"{_client.BaseAddress}/Contact/ContactList?start={start}&length={length}&searchText={searchText}&sortColumn={sortColumn}&sortDirection={sortDirection}";
+
+                // Append parameters if they are not null or empty
+                if (!string.IsNullOrEmpty(companyName))
+                    url += $"&CompanyName={companyName}";
+                if (!string.IsNullOrEmpty(contactName))
+                    url += $"&ContactName={contactName}";
+                if (!string.IsNullOrEmpty(email))
+                    url += $"&Email={email}";
+                if (!string.IsNullOrEmpty(city))
+                    url += $"&City={city}";
+
+                HttpResponseMessage response = _client.GetAsync(url).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    contactList = JsonConvert.DeserializeObject<List<ContactViewModel>>(data);
+                }
             }
+
+            string id = "1";
+
+            string bookMarkurl = $"{_client.BaseAddress}/Contact/GetBoomarkedList?id={id}&start={start}&length={length}&sortColumn={sortColumn}&sortDirection={sortDirection}"; 
+            HttpResponseMessage responsebookmakrd = _client.GetAsync(bookMarkurl).Result;
+
+            if (responsebookmakrd.IsSuccessStatusCode)
+            {
+                string data = responsebookmakrd.Content.ReadAsStringAsync().Result;
+                contactListBookMark = JsonConvert.DeserializeObject<List<ContactViewModel>>(data);
+            }
+
+            //contactListFinal.Concat(contactList);
+            //contactListFinal.Concat(contactListBookMark);
+
+            contactListFinal = contactList.Concat(contactListBookMark).ToList();
+
+
             return new JsonResult(new
             {
                 iTotalRecords = contactList.Count > 0 ? contactList[0].total_records : 0,
                 iTotalDisplayRecords = contactList.Count > 0 ? contactList[0].total_records : 0,
-                aaData = contactList
+                aaData = contactListFinal
             });
         }
         [HttpPost]

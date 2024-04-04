@@ -56,13 +56,52 @@ namespace AmbitCRM.BO.DAL
 
         }
 
+
+
+        public List<ContactModel> GetBookMakedList(string id, int? start, int? length,  string? sortColumn, string? sortDirection)
+
+        {
+            DALCommon log = new DALCommon();
+            List<ContactModel> ContactDetails = new List<ContactModel>();
+            SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
+            try
+            {
+
+                con.Open();
+
+                var cmd = new SqlCommand();
+                DynamicParameters parameters = new DynamicParameters();
+            
+                parameters.Add("@start_index", start);
+                parameters.Add("@page_size", length);
+              
+                parameters.Add("@sort_column", sortColumn);
+                parameters.Add("@sort_direction", sortDirection);
+                parameters.Add("@UserId", id);
+
+
+                ContactDetails = con.Query<ContactModel>("EXEC SP_GetBookMarkedContactDetailsList @UserID,@start_index,@page_size, @sort_column,@sort_direction", parameters).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                log.SaveLog("Get BookMarkedList", "" + ex);
+            }
+            finally
+            {
+                con.Close();
+                //con.Dispose();
+            }
+            return ContactDetails;
+
+        }
         #endregion
 
 
         #region BookMarked Status 
 
 
-        public ResponseModel BookmarkStatus(BookmarkedModel BM )
+        public ResponseModel BookmarkStatus(BookmarkedModel BM)
         {
             ResponseModel result = new ResponseModel();
             DALCommon log = new DALCommon();
@@ -72,7 +111,7 @@ namespace AmbitCRM.BO.DAL
                 {
                     con.Open();
 
-               
+
 
                     using (SqlCommand cmd = new SqlCommand("sp_save_and_update_boomark_details", con))
                     {
@@ -82,7 +121,7 @@ namespace AmbitCRM.BO.DAL
                         cmd.Parameters.AddWithValue("@ContactId", BM.ContactId);
                         cmd.Parameters.AddWithValue("@IsBookMarked", BM.IsBookMarked);
                         cmd.Parameters.AddWithValue("@CreatedBy", BM.UserId);
-                        
+
 
 
                         var id = cmd.ExecuteNonQuery();
@@ -115,6 +154,8 @@ namespace AmbitCRM.BO.DAL
         }
         #endregion
 
+
+        #region Save Search Details
         public ResponseModel SaveSearch(SearchModel SM)
         {
             ResponseModel result = new ResponseModel();
@@ -132,9 +173,9 @@ namespace AmbitCRM.BO.DAL
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@SearchType", SM.SearchType);
-                        cmd.Parameters.AddWithValue("@UserId",SM.UserID );
-                        cmd.Parameters.AddWithValue("@CompanyName",SM.CompanyName );
-                        cmd.Parameters.AddWithValue("@ContactName",SM.ContactName );
+                        cmd.Parameters.AddWithValue("@UserId", SM.UserID);
+                        cmd.Parameters.AddWithValue("@CompanyName", SM.CompanyName);
+                        cmd.Parameters.AddWithValue("@ContactName", SM.ContactName);
                         cmd.Parameters.AddWithValue("@Email", SM.Email);
                         cmd.Parameters.AddWithValue("@City", SM.City);
                         cmd.Parameters.AddWithValue("@CreatedBy", SM.UserID);
@@ -169,55 +210,9 @@ namespace AmbitCRM.BO.DAL
             }
             return result;
         }
+        #endregion
 
-        //public List<SearchModel> GetSearchList(string id)
-        //{
-        //    DALCommon log = new DALCommon();
-        //    List<SearchModel> SearchDetails = new List<SearchModel>();
-
-        //    try
-        //    {
-        //        using (SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString))
-        //        {
-        //            con.Open();
-
-        //            using (SqlCommand cmd = new SqlCommand("GetUserSearchDetails", con))
-        //            {
-        //                cmd.CommandType = CommandType.StoredProcedure;
-        //                cmd.Parameters.AddWithValue("@UserId", id);
-
-        //                SqlDataReader reader = cmd.ExecuteReader();
-        //                if (reader.HasRows)
-        //                {
-        //                    while (reader.Read())
-        //                    {
-        //                        SearchModel u = new SearchModel();
-        //                        u.SearchType = string.IsNullOrWhiteSpace(reader["SearchType"].ToString()) ? "" : reader["SearchType"].ToString();
-
-        //                        u.CompanyName = string.IsNullOrWhiteSpace(reader["CompanyName"].ToString()) ? "" : reader["CompanyName"].ToString();
-
-        //                        u.ContactName = string.IsNullOrWhiteSpace(reader["ContactName"].ToString()) ? "" : reader["ContactName"].ToString();
-
-        //                        u.Email = string.IsNullOrWhiteSpace(reader["Email"].ToString()) ? "" : reader["Email"].ToString();
-
-        //                        u.City = string.IsNullOrWhiteSpace(reader["City"].ToString()) ? "" : reader["City"].ToString();
-
-        //                        SearchDetails.Add(u);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.SaveLog("Get SearchList", ex.ToString());
-        //        throw; 
-        //    }
-
-
-        //    return SearchDetails;
-        //}
-
+        #region Get Search Details Based on UserId
         public List<SearchModel> GetSearchList(string id)
         {
             DALCommon log = new DALCommon();
@@ -228,12 +223,12 @@ namespace AmbitCRM.BO.DAL
                 con.Open();
                 try
                 {
-                 
-                   
-                    using (SqlCommand cmd = new SqlCommand("GetUserSearchDetails", con)) 
+
+
+                    using (SqlCommand cmd = new SqlCommand("GetUserSearchDetails", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-;
+                        ;
                         cmd.Parameters.AddWithValue("@UserId", id);
                         SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.HasRows)
@@ -280,5 +275,6 @@ namespace AmbitCRM.BO.DAL
                 return SearchDetails;
             }
         }
+        #endregion
     }
 }

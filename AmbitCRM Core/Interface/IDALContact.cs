@@ -15,6 +15,7 @@ namespace AmbitCRM_Core.Interface
 
         ResponseModel SaveSearch(SearchModel SM);
         List<SearchModel> GetSearchList(string id);
+        List<ContactModel> GetBookMakedList(string id, int? start, int? length, string? sortColumn, string? sortDirection);
 
     }
 }
