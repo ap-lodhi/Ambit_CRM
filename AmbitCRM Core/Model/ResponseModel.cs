@@ -37,6 +37,7 @@ namespace AmbitCRM_Core.Model
         public string empCode { get; set; }
         public string empEmail { get; set; }
         public string deviceId { get; set; }
+        public string loginHeader { get; set; }
 
     }
 }

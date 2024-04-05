@@ -5,17 +5,20 @@ using AmbitCRM_Core.Model;
 using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using System.Numerics;
+using System.Runtime.InteropServices;
 
 namespace AmbitCRM.BO.DAL
 {
     public class DALContact : IDALContact
     {
 
+        DALCommon log = new DALCommon();
         #region Get  Contact  List 
-        public List<ContactModel> GetContactList(int? start, int? length, string? searchText, string? sortColumn, string? sortDirection, string? CompanyName, string? ContactName, string? Email, string? City)
+        public List<ContactModel> GetContactList(int? start, int? length, string? searchText, string? sortColumn, string? sortDirection, string? CompanyName, string? ContactName, string? Email, string? City, string? SearchType)
 
         {
-            DALCommon log = new DALCommon();
+            
             List<ContactModel> ContactDetails = new List<ContactModel>();
             SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
 
@@ -36,8 +39,9 @@ namespace AmbitCRM.BO.DAL
                 parameters.Add("@ContactName", ContactName);
                 parameters.Add("@Email", Email);
                 parameters.Add("@City", City);
+                parameters.Add("@SearchType", SearchType);
 
-                ContactDetails = con.Query<ContactModel>("EXEC SP_GetContactDetailsList @start_index,@page_size,@search_text,@sort_column,@sort_direction,@CompanyName, @ContactName,@Email,@City", parameters).ToList();
+                ContactDetails = con.Query<ContactModel>("EXEC SP_GetContactDetailsList_Main @start_index,@page_size,@search_text,@sort_column,@sort_direction,@CompanyName, @ContactName,@Email,@City,@SearchType", parameters).ToList();
 
 
 
@@ -58,10 +62,10 @@ namespace AmbitCRM.BO.DAL
 
 
 
-        public List<ContactModel> GetBookMakedList(string id, int? start, int? length,  string? sortColumn, string? sortDirection)
+        public List<ContactModel> GetBookMakedList(string id, int? start, int? length, string? sortColumn, string? sortDirection)
 
         {
-            DALCommon log = new DALCommon();
+           
             List<ContactModel> ContactDetails = new List<ContactModel>();
             SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
             try
@@ -71,10 +75,10 @@ namespace AmbitCRM.BO.DAL
 
                 var cmd = new SqlCommand();
                 DynamicParameters parameters = new DynamicParameters();
-            
+
                 parameters.Add("@start_index", start);
                 parameters.Add("@page_size", length);
-              
+
                 parameters.Add("@sort_column", sortColumn);
                 parameters.Add("@sort_direction", sortDirection);
                 parameters.Add("@UserId", id);
@@ -104,7 +108,7 @@ namespace AmbitCRM.BO.DAL
         public ResponseModel BookmarkStatus(BookmarkedModel BM)
         {
             ResponseModel result = new ResponseModel();
-            DALCommon log = new DALCommon();
+          
             using (SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString))
             {
                 try
@@ -159,7 +163,7 @@ namespace AmbitCRM.BO.DAL
         public ResponseModel SaveSearch(SearchModel SM)
         {
             ResponseModel result = new ResponseModel();
-            DALCommon log = new DALCommon();
+           
             using (SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString))
             {
                 try
@@ -199,6 +203,7 @@ namespace AmbitCRM.BO.DAL
                 }
                 catch (Exception ex)
                 {
+                    result.message += ex.ToString();
                     result.status = false;
                     log.SaveLog("Search Save", "ex" + ex);
 
@@ -215,7 +220,7 @@ namespace AmbitCRM.BO.DAL
         #region Get Search Details Based on UserId
         public List<SearchModel> GetSearchList(string id)
         {
-            DALCommon log = new DALCommon();
+           
             List<SearchModel> SearchDetails = new List<SearchModel>();
             SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
             {
@@ -236,6 +241,7 @@ namespace AmbitCRM.BO.DAL
                             while (reader.Read())
                             {
                                 SearchModel u = new SearchModel();
+                                u.SearchId = string.IsNullOrEmpty(reader["SearchId"].ToString()) ? 0 : Convert.ToInt32(reader["SearchId"]);
                                 u.SearchType = string.IsNullOrWhiteSpace(reader["SearchType"].ToString()) ? "" : reader["SearchType"].ToString();
 
                                 u.CompanyName = string.IsNullOrWhiteSpace(reader["CompanyName"].ToString()) ? "" : reader["CompanyName"].ToString();
@@ -274,6 +280,58 @@ namespace AmbitCRM.BO.DAL
 
                 return SearchDetails;
             }
+        }
+        #endregion
+
+
+
+        #region Delete Search
+
+        public ResponseModel DeletePreviousSearch(int id)
+        {
+            ResponseModel res = new ResponseModel();
+            SqlConnection con = new SqlConnection(CommonHelper.GetConnectionString);
+            try
+            {
+
+
+                SqlCommand cmd = new SqlCommand("Sp_Delete_previous_Search", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", id);
+                
+
+
+                con.Open();
+                var Id = cmd.ExecuteNonQuery();
+                if (Id > 0)
+                {
+                    res.status = true;
+                    res.message = "Previous Search Delete Succesfully";
+                }
+                else
+                {
+                    res.status = false;
+                
+                    res.message = "Please Check...Something Went wrong...!!!";
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+              
+                res.status = false;
+                log.SaveLog("Delete Previous Search", ex.ToString());
+
+            }
+            finally
+            {
+                con.Close();
+                con.Dispose();
+            }
+            return res;
+
         }
         #endregion
     }

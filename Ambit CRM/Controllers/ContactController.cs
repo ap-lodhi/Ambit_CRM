@@ -23,10 +23,10 @@ namespace Ambit_CRM.Controllers
 
         [HttpGet]
         [Route("ContactList")]
-        public ActionResult ContactList(int? start, int? length, string? searchText, string? sortColumn, string? sortDirection, string? CompanyName, string? ContactName, string? Email, string? City)
+        public ActionResult ContactList(int? start, int? length, string? searchText, string? sortColumn, string? sortDirection, string? CompanyName, string? ContactName, string? Email, string? City ,string? SearchType)
         {
             List<ContactModel> contactList = new List<ContactModel>();
-            contactList = _IContact.GetContactList(start, length, searchText, sortColumn, sortDirection, CompanyName, ContactName, Email, City);
+            contactList = _IContact.GetContactList(start, length, searchText, sortColumn, sortDirection, CompanyName, ContactName, Email, City, SearchType);
             if (contactList.Count == 0)
             {
                 return NotFound("List not  Found");
@@ -49,8 +49,8 @@ namespace Ambit_CRM.Controllers
 
 
 
-        [HttpPost, Route("BookmarkedStatus")]
-        public ActionResult BookmarkedStatus(BookmarkedModel BM)
+        [HttpPost, Route("SaveBookmarked")]
+        public ActionResult SaveBookmarked(BookmarkedModel BM)
         {
           
            var   res =  _IContact.BookmarkStatus(BM);
@@ -70,14 +70,27 @@ namespace Ambit_CRM.Controllers
         }
 
         [HttpGet]
-        [Route("SearchDetails")]
+        [Route("GetSearchDetails")]
 
-        public ActionResult SearchDetails(string id)
+        public ActionResult GetSearchDetails(string id)
         {
             List<SearchModel> searchList = new List<SearchModel>();
             searchList = _IContact.GetSearchList(id);
             
             return Ok(searchList);  
+
+
+        }
+
+        [HttpDelete]
+        [Route("DeleteSearch")]
+
+        public ActionResult DeleteSearch(int id)
+        {
+         ResponseModel res  = new ResponseModel();
+            res = _IContact.DeletePreviousSearch(id);
+
+            return Ok(res);
 
 
         }

@@ -36,9 +36,9 @@ namespace AmbitCRM.Web.Controllers
         [HttpGet]
         public ActionResult Dashboard()
         {
-            
+            _client.DefaultRequestHeaders.Add("login", "login");
             List<SearchModel> srcList = new List<SearchModel>();
-            string url = $"{_client.BaseAddress}/Contact/SearchDetails?id={1}";
+            string url = $"{_client.BaseAddress}/Contact/GetSearchDetails?id={1}";
             HttpResponseMessage response = _client.GetAsync(url).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -48,8 +48,10 @@ namespace AmbitCRM.Web.Controllers
           
             return View(srcList);
         }
-        public JsonResult GetContact(DataTableParams dataTableParams, string? companyName, string? contactName, string? email, string? city)
+        public JsonResult GetContact(DataTableParams dataTableParams, string? companyName, string? contactName, string? email, string? city ,string? SearchType)
         {
+            string srctype = SearchType;
+            int totalCount = 0;
             int start = dataTableParams.start;
             int length = dataTableParams.length;
             string searchText = dataTableParams.searchText;
@@ -58,13 +60,15 @@ namespace AmbitCRM.Web.Controllers
             List<ContactViewModel> contactList = new List<ContactViewModel>();
             List<ContactViewModel> contactListBookMark = new List<ContactViewModel>();
             List<ContactViewModel> contactListFinal = new List<ContactViewModel>();
+            List<ContactViewModel> contactListMain = new List<ContactViewModel>();
 
-            //  _client.DefaultRequestHeaders.Add("jwtToken", "jrttkennnn");
+            _client.DefaultRequestHeaders.Add("login", "login");
             //  _client.DefaultRequestHeaders.Add("empEmail", "test@gmail.occ");
             //  _client.DefaultRequestHeaders.Add("deviceId", "457645");
 
-            if (!string.IsNullOrEmpty(companyName) || !string.IsNullOrEmpty(contactName) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(city))
+            if (!string.IsNullOrEmpty(companyName) || !string.IsNullOrEmpty(contactName) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(SearchType))
             {
+               
                 string url = $"{_client.BaseAddress}/Contact/ContactList?start={start}&length={length}&searchText={searchText}&sortColumn={sortColumn}&sortDirection={sortDirection}";
 
                 // Append parameters if they are not null or empty
@@ -75,7 +79,9 @@ namespace AmbitCRM.Web.Controllers
                 if (!string.IsNullOrEmpty(email))
                     url += $"&Email={email}";
                 if (!string.IsNullOrEmpty(city))
-                    url += $"&City={city}";
+                    url += $"&City={city}"; 
+                if (!string.IsNullOrEmpty(SearchType))
+                    url += $"&SearchType={SearchType}";
 
                 HttpResponseMessage response = _client.GetAsync(url).Result;
                 if (response.IsSuccessStatusCode)
@@ -84,7 +90,13 @@ namespace AmbitCRM.Web.Controllers
                     contactList = JsonConvert.DeserializeObject<List<ContactViewModel>>(data);
                 }
             }
+            if (contactList.Count > 0)
+            {
 
+
+                totalCount = totalCount + Convert.ToInt32(contactList[0].total_records);
+
+            }
             string id = "1";
 
             string bookMarkurl = $"{_client.BaseAddress}/Contact/GetBoomarkedList?id={id}&start={start}&length={length}&sortColumn={sortColumn}&sortDirection={sortDirection}"; 
@@ -99,20 +111,46 @@ namespace AmbitCRM.Web.Controllers
             //contactListFinal.Concat(contactList);
             //contactListFinal.Concat(contactListBookMark);
 
+            totalCount = totalCount + contactListBookMark.Count;
+
+
             contactListFinal = contactList.Concat(contactListBookMark).ToList();
+
+            foreach (ContactViewModel contact in contactListFinal)
+            {
+                ContactViewModel contactModel = new ContactViewModel();
+
+                contactModel.total_records =  contact.total_records = totalCount;
+
+                contactModel.CreatedDate = contact.CreatedDate;
+                contactModel.CompanyName = contact.CompanyName;
+                contactModel.ContactName = contact.ContactName;
+                contactModel.City = contact.City;   
+                contactModel.Email = contact.Email;
+                contactModel.Source = contact.Source;
+                contactModel.RM = contact.RM;
+                contactModel.ContactId = contact.ContactId;
+                contactModel.LastInteractionDate = contact.LastInteractionDate;
+                contactModel.LastInteractionWith = contact.LastInteractionWith;
+                contactModel.IsBookMarked = contact.IsBookMarked;
+
+                contactListMain.Add(contactModel);  
+            }
 
 
             return new JsonResult(new
             {
-                iTotalRecords = contactList.Count > 0 ? contactList[0].total_records : 0,
-                iTotalDisplayRecords = contactList.Count > 0 ? contactList[0].total_records : 0,
-                aaData = contactListFinal
+                iTotalRecords = contactListMain.Count > 0 ? contactListMain[0].total_records : 0,
+                iTotalDisplayRecords = contactListMain.Count > 0 ? contactListMain[0].total_records : 0,
+                aaData = contactListMain
             });
         }
         [HttpPost]
         public JsonResult BookMarked(BookmarkedModel BM)
         {
-            string requestUri = $"{_client.BaseAddress}/Contact/BookmarkedStatus";
+            _client.DefaultRequestHeaders.Add("login", "login");
+
+            string requestUri = $"{_client.BaseAddress}/Contact/SaveBookmarked";
             var json = JsonConvert.SerializeObject(BM);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -126,12 +164,14 @@ namespace AmbitCRM.Web.Controllers
                 return Json(responseData);
 
             }
-            return Json(response);
+            var errorData = new { ErrorMessage = "Failed to save BookMarked." };
+            return Json(errorData);
         }
 
         [HttpPost]
         public JsonResult SaveSearch(SearchModel SM)
         {
+            _client.DefaultRequestHeaders.Add("login", "login");
             string requestUri = $"{_client.BaseAddress}/Contact/SaveSearch";
             var json = JsonConvert.SerializeObject(SM);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -145,9 +185,32 @@ namespace AmbitCRM.Web.Controllers
                 return Json(responseData);
                 
             }
-
-            return Json(response);
+            var errorData = new { ErrorMessage = "Failed to save search." };
+            return Json(errorData);
         }
+
+        [HttpPost]
+        public JsonResult DeleteSearch(int id)
+        {
+            _client.DefaultRequestHeaders.Add("login", "login");
+            string url = $"{_client.BaseAddress}/Contact/DeleteSearch?id={id}";
+
+            HttpResponseMessage response = _client.DeleteAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                return Json(responseData);
+            }
+            else
+            {
+               
+                var errorData = new { ErrorMessage = "Failed to delete search." };
+                return Json(errorData);
+            }
+        }
+
+
 
     }
 }

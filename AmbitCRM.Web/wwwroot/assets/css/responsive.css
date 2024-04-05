@@ -1,10 +1,10 @@
 ﻿@media (min-width: 992px) {
     #login {
-        background-image: url(../images/login_bg.svg);
+        background-image: url('../images/login_bg.svg');
         background-repeat: no-repeat;
         background-size: cover;
     }
-
+   
         #login form {
             background-color: #0000004a;
         }

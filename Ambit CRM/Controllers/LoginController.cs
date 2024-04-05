@@ -24,44 +24,44 @@ namespace Ambit_CRM.Controllers
             this._Config = config;
         }
 
-        [HttpPost, Route("login")]
-        public ActionResult login(LoginModel login)
-        {
-            ResponseModel loginDetails = new ResponseModel();
-            if (!string.IsNullOrWhiteSpace(login.Email) && !string.IsNullOrWhiteSpace(login.Password))
+        //[HttpPost, Route("login")]
+        //public ActionResult login(LoginModel login)
+        //{
+        //    ResponseModel loginDetails = new ResponseModel();
+        //    if (!string.IsNullOrWhiteSpace(login.Email) && !string.IsNullOrWhiteSpace(login.Password))
 
-            {
-                bool AdLogin = true;
-                LoginModel user = new LoginModel();
-                user.Email = login.Email;
-                user.Password = login.Password;
+        //    {
+        //        bool AdLogin = true;
+        //        LoginModel user = new LoginModel();
+        //        user.Email = login.Email;
+        //        user.Password = login.Password;
              
-                if (AdLogin == true)
-                {
-                    string Token = GenerateToken(user);
+        //        if (AdLogin == true)
+        //        {
+        //            string Token = GenerateToken(user);
                   
-                    loginDetails = _ILogin.loginUser(user, Token);
-                    var empcode = loginDetails.UserKey;
+        //            loginDetails = _ILogin.loginUser(user, Token);
+        //            var empcode = loginDetails.UserKey;
 
-                    var empid = empcode.ToString();
-                    var email = loginDetails.Email; 
+        //            var empid = empcode.ToString();
+        //            var email = loginDetails.Email; 
 
-                    var ans  = _ILogin.SaveLoginDetails(user, Token, empcode, email);
-                  //  var res = _ILogin.LoginDetails(Token, empid);
+        //            var ans  = _ILogin.SaveLoginDetails(user, Token, empcode, email);
+        //          //  var res = _ILogin.LoginDetails(Token, empid);
                     
-                    return Ok(loginDetails);
-                }
-                else
-                {
-                    return BadRequest("Invalid EmployeeCode/Password.");
-                }
-            }
+        //            return Ok(loginDetails);
+        //        }
+        //        else
+        //        {
+        //            return BadRequest("Invalid EmployeeCode/Password.");
+        //        }
+        //    }
 
-            else
-            {
-                return BadRequest("Please Enter Valid EmployeeCode/Password.");
-            }
-        }
+        //    else
+        //    {
+        //        return BadRequest("Please Enter Valid EmployeeCode/Password.");
+        //    }
+        //}
 
 
         [HttpPost, Route("loginApp")]

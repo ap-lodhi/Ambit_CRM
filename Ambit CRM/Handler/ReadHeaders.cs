@@ -19,22 +19,21 @@ namespace Ambit_CRM.Handler
         DALCommon daLCommon = new DALCommon();
         public void OnActionExecuting(ActionExecutingContext context)
         {
-           // var jwtToken = context.HttpContext.Request.Headers["jwtToken"].ToString();
-            
-            
-            
-            
-            
+
+
             HeadersKeyDetails headersKeyDetails = new HeadersKeyDetails();
+
+
+            headersKeyDetails.loginHeader = context.HttpContext.Request.Headers["login"].ToString();
+
             headersKeyDetails.jwtToken = context.HttpContext.Request.Headers["jwtToken"].ToString();
             headersKeyDetails.empEmail = context.HttpContext.Request.Headers["empEmail"].ToString();
             headersKeyDetails.deviceId = context.HttpContext.Request.Headers["deviceId"].ToString();
 
-            if (string.IsNullOrEmpty(headersKeyDetails.jwtToken) && string.IsNullOrEmpty(headersKeyDetails.empEmail) && string.IsNullOrEmpty(headersKeyDetails.deviceId))
+            if(headersKeyDetails.loginHeader == "login")
             {
-                //Do Nothing 
-                //var req = HttpContext.Current.Request;
-                //string a = "";         
+
+                string gg = "";
             }
             else
             {
@@ -53,13 +52,13 @@ namespace Ambit_CRM.Handler
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                         //if (context.HttpContext.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
                         //{
-                            // Modify the response if unauthorized
-                            context.Result = new ContentResult
-                            {
-                                StatusCode = (int)HttpStatusCode.Unauthorized,
-                                Content = "Unauthorized access."
-                            };
-                       // }
+                        // Modify the response if unauthorized
+                        context.Result = new ContentResult
+                        {
+                            StatusCode = (int)HttpStatusCode.Unauthorized,
+                            Content = "Unauthorized access."
+                        };
+                        // }
                     }
                 }
                 else
@@ -76,8 +75,7 @@ namespace Ambit_CRM.Handler
                     // }
                 }
             }
-            // Continue with the action execution
-            //  base.OnActionExecuting(actionContext);
+
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {

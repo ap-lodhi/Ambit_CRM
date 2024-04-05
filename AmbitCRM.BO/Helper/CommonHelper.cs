@@ -21,10 +21,10 @@ namespace AmbitCRM.BO.Helper
         }
         public static void WriteLog(string message)
         {
-            DALCommon log = new DALCommon();
-            var path = log.GetConfigValue("Error_log");
+            //DALCommon log = new DALCommon();
+            //var path = log.GetConfigValue("Error_log");
 
-            string ErrorLogDir = @path;
+            string ErrorLogDir = @"F:\\ambitapis.cylsys.com\\CRM_Log";
 
             if (!Directory.Exists(ErrorLogDir))
 
